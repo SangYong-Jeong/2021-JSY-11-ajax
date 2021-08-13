@@ -8,7 +8,10 @@
 .lists.web .list .dt {}
 
 .lists.image {}
-.lists.image .list {margin: .5%; width: 11.5%;}
+.lists.image .list {width: 12.5%; border: 5px solid #fff; cursor: pointer; transition: all .5s; display: flex; position: relative;}
+.lists.image .list .info {width: 0; background-color: #fff; transition: all .35s; position: absolute; height: 100%; transition-delay: .5s;}
+.lists.image .list:hover {border-color: #548308; transform: scale(1.5); box-shadow: 0 0 10px rgba(0, 0, 0, .4); z-index: 9999;}
+.lists.image .list:hover .info {width: 200px; transform: translate(100%);}
 
 /**********************  *********************/
 
@@ -19,18 +22,18 @@
 }
 
 @media (max-width: 1199px) {
-	.lists.image .list {width: 15.6667%;}
+	.lists.image .list {width: 16.6667%;}
 }
 
 @media (max-width: 991px) {
-	.lists.image .list {width: 19%;}
+	.lists.image .list {width: 20%;}
 }
 
 @media (max-width: 767px) {
-	.lists.image .list {width: 32.3333%;}
+	.lists.image .list {width: 33.3333%;}
 }
 
 @media (max-width: 575px) {
-	.lists.image .list {width: 49%;}
+	.lists.image .list {width: 50%;}
 	.form-control {margin-bottom: .25em;}
 }
