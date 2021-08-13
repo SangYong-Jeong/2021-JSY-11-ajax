@@ -9,7 +9,7 @@
 
 .lists.image {}
 .lists.image .list {width: 12.5%; border: 5px solid #fff; cursor: pointer; transition: all .5s; display: flex; position: relative;}
-.lists.image .list .info {width: 0; background-color: #fff; transition: all .35s; position: absolute; height: 100%; transition-delay: .5s;}
+.lists.image .list .info {width: 0; background-color: #fff; transition: all .35s; position: absolute; height: 100%; transition-delay: .5s; right: 0;}
 .lists.image .list:hover {border-color: #548308; transform: scale(1.5); box-shadow: 0 0 10px rgba(0, 0, 0, .4); z-index: 9999;}
 .lists.image .list:hover .info {width: 200px; transform: translate(100%);}
 
