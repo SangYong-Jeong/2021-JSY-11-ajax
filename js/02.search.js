@@ -178,9 +178,10 @@ function setCafeLists (r) {
 	$('.lists').empty().attr('class', 'lists cafe');
 	var html = '';
 	r.forEach(function (v, i) {
+	var thumbnail = v.thumbnail !== '' ? v.thumbnail : 'http://via.placeholder.com/130x130/eee?text=No+image';
 	html = '<li class="list">';
 	html += '<a href="'+v.url+'" class="thumbs" target="_blank">';
-	html += '<img src="'+v.thumbnail+'" alt="'+v.title+'" class="w100">';
+	html += '<img src="'+thumbnail+'" alt="'+v.title+'" class="w100">';
 	html += '</a>';
 	html += '<div class="contents">';
 	html += '<a class="title" href="'+v.url+'" target="_blank">'+v.title+'</a>';
