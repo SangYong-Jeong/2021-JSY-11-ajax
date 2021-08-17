@@ -41,11 +41,11 @@
 .lists.clip .list .contents .link {font-size: 1em; color: #03378a; margin-bottom: .325em; display: inline-block;}
 .lists.clip .list .contents .dt {font-size: .875em; color: #999;}
 
-.lists.book {display: flex; flex-wrap: wrap; align-items: flex-start;}
+.lists.book {display: flex; flex-wrap: wrap;}
 .lists.book .list {width: 50%; padding: 2em; border-bottom: 1px solid #dedede;}
 .lists.book .list:nth-child(odd) {border-right: 1px solid #dedede;}
 .lists.book .title {font-size: 1.25em; color: #03378a; margin-bottom: .75em; display: inline-block;}
-.lists.book .info-wrap {display: flex; margin-bottom: 1em;}
+.lists.book .info-wrap {display: flex; margin-bottom: 1em; align-items: flex-start;}
 .lists.book .thumb-wp {width: 130px; padding: 4px; border: 1px solid #03378a;}
 .lists.book .info-wp {width: calc(100% - 140px); padding-left: 1.5em;}
 .lists.book .info-wp .authors {margin-bottom: .75em;}
