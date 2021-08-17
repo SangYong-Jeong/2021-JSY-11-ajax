@@ -207,7 +207,11 @@ function setPager (isEnd, totalRecord) {
 	startPage = Math.floor((page - 1) / pagerCnt) * pagerCnt + 1;
 	endPage = startPage + pagerCnt - 1;
 	if(endPage > totalPage) endPage = totalPage;
-
+	
+	// if(endPage > totalPage) {
+	// 	endPage = totalPage;
+	// 	startPage = endPage%pagerCnt === 1 ? endPage : endPage - pagerCnt;  -> 내가 직접 수정한 부분
+	// }
 	$('.pager-wrap .bt-page').remove(); // el가 삭제되면 이벤트도 삭제된다.
 	for(var i = startPage; i<=endPage; i++) {
 		// $('.pager-wrap .bt-next').before('<a href="#" class="bt-page">'+i+'</a>');
