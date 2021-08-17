@@ -15,3 +15,12 @@ function zp(n) {
 function numberFormat(v) {
 	return v.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function getPlayTime (s) {
+	if(Math.floor(s/60) >= 60) {
+		return zp(Math.floor(s/60/60)) + ':' + zp(Math.floor(s/60%60)) +':'+ zp(s%60);
+	}
+	else {
+		return zp(Math.floor(s/60))+':'+zp(s%60);
+	}
+}

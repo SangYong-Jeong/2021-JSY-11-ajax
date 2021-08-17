@@ -11,6 +11,43 @@
 .lists.image .list {width: 12.5%; border: 5px solid #fff; cursor: pointer; transition: all .5s;}
 .lists.image .list:hover {border-color: #548308; transform: scale(1.5); box-shadow: 0 0 10px rgba(0, 0, 0, .4); z-index: 9;}
 
+.lists.blog {}
+.lists.blog .list {display: flex; padding: 1em 1em; border-bottom: 1px solid #dedede;}
+.lists.blog .list .thumbs {width: 140px; padding: 4px; border: 1px solid #03378a;}
+.lists.blog .list .contents {width: calc(100% - 140px); padding-left: 1.5em;}
+.lists.blog .list .contents .title {font-size: 1.25em; color: #03378a; margin-bottom: .5em; display: inline-block;}
+.lists.blog .list .contents .content {font-size: 1em; line-height: 1.25; color: #777; margin-bottom: .75em;}
+.lists.blog .list .contents .name {font-size: 1em; color: #03378a; margin-bottom: .325em; display: inline-block;}
+.lists.blog .list .contents .link {font-size: 1em; color: #03378a; margin-bottom: .325em; display: inline-block;}
+.lists.blog .list .contents .dt {font-size: .875em; color: #999;}
+
+.lists.clip {}
+.lists.clip .list {display: flex; padding: 1em 1em; border-bottom: 1px solid #dedede;}
+.lists.clip .list .thumbs {width: 148px; padding: 4px; border: 1px solid #03378a;}
+.lists.clip .list .contents {width: calc(100% - 148px); padding-left: 1.5em;}
+.lists.clip .list .contents .title {font-size: 1.25em; color: #03378a; margin-bottom: .5em; display: inline-block;}
+.lists.clip .list .contents .author {font-size: 1em; color: #03378a; margin-bottom: .325em; display: inline-block;}
+.lists.clip .list .contents .play-time {font-size: 1em; color: #777; margin-bottom: .325em;}
+.lists.clip .list .contents .link {font-size: 1em; color: #03378a; margin-bottom: .325em; display: inline-block;}
+.lists.clip .list .contents .dt {font-size: .875em; color: #999;}
+
+.lists.book {display: flex; flex-wrap: wrap}
+.lists.book .list {width: 50%; padding: 2em; border-bottom: 1px solid #dedede;}
+.lists.book .list:nth-child(odd) {border-right: 1px solid #dedede;}
+.lists.book .title {font-size: 1.25em; color: #03378a; margin-bottom: .75em; display: inline-block;}
+.lists.book .info-wrap {display: flex; margin-bottom: 1em;}
+.lists.book .thumb-wp {width: 130px; padding: 4px; border: 1px solid #03378a;}
+.lists.book .info-wp {width: calc(100% - 140px); padding-left: 1.5em;}
+.lists.book .info-wp .authors {margin-bottom: .75em;}
+.lists.book .info-wp .prices {margin-bottom: .625em; font-size: 1.125em;}
+.lists.book .info-wp .prices .price {color: #999; text-decoration: line-through;}
+.lists.book .info-wp .prices .sale-price {font-size: 1.125em; color: #03378a;}
+.lists.book .info-wp .prices .status {color: #999;}
+.lists.book .info-wp .publisher {margin-bottom: .75em;}
+.lists.book .info-wp .isbn {margin-bottom: .75em; color: #999;}
+.lists.book .info-wp .dt {color: #999;}
+.lists.book .content {color: #444; line-height: 1.25;}
+
 .modal-wrapper {position: fixed; top: 0; left: 0; z-index: 2; background-color: rgba(0, 0, 0, .8); display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh;}
 .modal-wrapper .modal-wrap {background-color: #fff;}
 .modal-wrapper .modal-wrap .img-wp {position: relative;}
@@ -21,6 +58,7 @@
 .modal-wrapper .modal-wrap .name-wp .name {text-decoration: underline;}
 .modal-wrapper .modal-wrap .link {color: #155daf; font-size: .875em; display: inline-block;}
 .modal-wrapper .modal-wrap .dt {color: #999; font-size: .875em;}
+
 
 
 
