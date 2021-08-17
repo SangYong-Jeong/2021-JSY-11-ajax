@@ -139,7 +139,6 @@ function setClipLists (r) {
 	});
 }
 
-
 function setBookLists (r) {
 	$('.lists').empty().attr({'class': 'lists book', 'style': ''});
 	var html = '';
