@@ -1,7 +1,7 @@
 /************* Global init ***************/
 var auth = 'KakaoAK 4545d096ee04bdcea13013e722fa668f';
 var kakaoURL = 'https://dapi.kakao.com/';
-
+var data = [];
 
 /************* user function *************/
 function getPath (cate) {
@@ -32,8 +32,20 @@ function setWebLists (r) {
 	});
 }
 
-function setImageLists (r) {
-	console.log(r);
+function setBlogLists (r) {
+	$('.lists').empty().attr('class', 'lists blog');
+	r.forEach(function (v, i) {
+		var html  = '<li class="list">';
+		html += '<a class="title" href="'+v.url+'" target="_blank">'+v.title+'</a>';
+		html += '<p class="content">'+v.contents+'</p>';
+		html += '<a class="link" href="'+v.url+'" target="_blank">'+v.url+'</a>';
+		html += '<div class="dt">'+moment(v.datetime).format('YYYY-MM-DD HH:mm:ss')+'</div>';
+		html += '</li>';
+		$('.lists').append(html);
+	});
+}
+
+/* function setImageLists (r) {
 	$('.lists').empty().attr('class', 'lists image grid-wrap');
 	$('.lists').append('<li class="list grid-sizer"></li>');
 	r.forEach(function (v, i) {
@@ -62,15 +74,44 @@ function setImageLists (r) {
 		$grid.masonry('layout');
 		$grid.masonry('reloadItems');
 	});
+} */
+
+function setImageLists (r) {
+	data = [];
+	$('.lists').empty().attr('class', 'lists image grid-wrap');
+	$('.lists').append('<li class="list grid-sizer"></li>');
+	r.forEach(function (v, i) {
+		data[i] = {
+			collection: v.collection,
+			width: v.width,
+			height: v.height,
+			src: v.image_url,
+			thumb: v.thumbnail_url,
+			name: v.display_sitename,
+			url: v.doc_url,
+			dt: v.datetime,
+		};
+		var html  = '<li class="list grid-item" data-id="'+i+'">';
+		html += '<img src="'+v.thumbnail_url+'" class="w100">';
+		html += '<div class="info"></div>';
+		html += '</li>';
+		$(html).appendTo('.lists').click(onModalShow);
+	});
+	var $grid = $('.grid-wrap').masonry({
+		itemSelector: '.grid-item',
+		columnWidth: '.grid-sizer',
+		percentPosition: true
+	});
+	$grid.imagesLoaded().progress( function() {
+		$grid.masonry('layout');
+		$grid.masonry('reloadItems');
+	});
 }
 
 function setClipLists (r) {
 	console.log(r);
 }
 
-function setBlogLists (r) {
-	console.log(r);
-}
 
 function setBookLists (r) {
 	console.log(r);
@@ -87,24 +128,29 @@ function onLoadError(el) {
 
 function onModalShow () {
 	var v = $(this).data('info');
+	var i = $(this).data('id');
 	$('.modal-wrapper').show();
-	$('.modal-wrapper .img-wp img').attr('src', v.src);
-	$('.modal-wrapper .img-wp img').data('thumb', v.thumb);
-	$('.modal-wrapper .size-wp').html(v.width + ' x ' + v.height);
-	$('.modal-wrapper .collection').html('['+v.name+'] ');
-	$('.modal-wrapper .name').html(v.name);
-	$('.modal-wrapper .link').attr('href', v.url).html(v.url);
-	$('.modal-wrapper .dt').html(moment(v.datetime).format('YYYY-MM-DD HH:mm:ss'));
+	$('.modal-wrapper .img-wp img').attr('src', data[i].src);
+	$('.modal-wrapper .img-wp img').data('thumb', data[i].thumb);
+	$('.modal-wrapper .size-wp').html(data[i].width + ' x ' + data[i].height);
+	$('.modal-wrapper .collection').html('['+data[i].name+'] ');
+	$('.modal-wrapper .name').html(data[i].name);
+	$('.modal-wrapper .link').attr('href', data[i].url).html(data[i].url);
+	$('.modal-wrapper .dt').html(moment(data[i].datetime).format('YYYY-MM-DD HH:mm:ss'));
 }
 
 function onSubmit(e) {
 	e.preventDefault();
 	var cate = $(this).find('select[name="category"]').val().trim();
 	var query = $(this).find('input[name="query"]').val().trim();
+	if(cate && cate !== '' && query && query !== '')
 	axios.get(getPath(cate), getParams(query)).then(onSuccess).catch(onError);
+	else
+		$(this).find('input[name="query"]').focus();
 }
 
 function onSuccess (res) {
+	console.log(res);
 	var cate = res.config.url.split('/').pop();
 	var v = res.data;
 	setTotalCnt(v.meta.total_count);
