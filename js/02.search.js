@@ -20,7 +20,7 @@ function setTotalCnt (cnt) {
 }
 
 function setWebLists (r) {
-	$('.lists').empty().attr('class', 'lists web');
+	$('.lists').empty().attr({'class': 'lists web', 'style': ''});
 	r.forEach(function (v, i) {
 		var html  = '<li class="list">';
 		html += '<a class="title" href="'+v.url+'" target="_blank">'+v.title+'</a>';
@@ -33,7 +33,7 @@ function setWebLists (r) {
 }
 
 function setBlogLists (r) {
-	$('.lists').empty().attr('class', 'lists blog');
+	$('.lists').empty().attr({'class': 'lists blog', 'style': ''});
 	var html = '';
 	r.forEach(function (v, i) {
 	html = '<li class="list">';
@@ -84,7 +84,7 @@ function setBlogLists (r) {
 
 function setImageLists (r) {
 	data = [];
-	$('.lists').empty().attr('class', 'lists image grid-wrap');
+	$('.lists').empty().attr({'class': 'lists image grid-wrap', 'style': ''});
 	$('.lists').append('<li class="list grid-sizer"></li>');
 	r.forEach(function (v, i) {
 		data[i] = {
@@ -115,7 +115,7 @@ function setImageLists (r) {
 }
 
 function setClipLists (r) {
-	$('.lists').empty().attr('class', 'lists clip');
+	$('.lists').empty().attr({'class': 'lists clip', 'style': ''});
 	var html = '';
 	r.forEach(function (v, i) {
 	html = '<li class="list">';
@@ -138,7 +138,7 @@ function setClipLists (r) {
 
 
 function setBookLists (r) {
-	$('.lists').empty().attr('class', 'lists book');
+	$('.lists').empty().attr({'class': 'lists book', 'style': ''});
 	var html = '';
 	r.forEach(function (v, i) {
 	var author = v.authors.join(', ');
@@ -175,7 +175,7 @@ function setBookLists (r) {
 }
 
 function setCafeLists (r) {
-	$('.lists').empty().attr('class', 'lists cafe');
+	$('.lists').empty().attr({'class': 'lists cafe', 'style': ''});
 	var html = '';
 	r.forEach(function (v, i) {
 	var thumbnail = v.thumbnail !== '' ? v.thumbnail : 'http://via.placeholder.com/130x130/eee?text=No+image';
