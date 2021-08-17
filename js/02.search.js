@@ -210,7 +210,8 @@ function setPager (isEnd, totalRecord) {
 	
 	// if(endPage > totalPage) {
 	// 	endPage = totalPage;
-	// 	startPage = endPage%pagerCnt === 1 ? endPage : endPage - pagerCnt;  -> 내가 직접 수정한 부분
+	// 	startPage = endPage%pagerCnt === 1 ? endPage : endPage - pagerCnt;  /* -> 내가 직접 수정한 부분 */
+	// 	page = startPage;
 	// }
 	$('.pager-wrap .bt-page').remove(); // el가 삭제되면 이벤트도 삭제된다.
 	for(var i = startPage; i<=endPage; i++) {
