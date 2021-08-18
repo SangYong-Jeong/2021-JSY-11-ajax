@@ -6,3 +6,7 @@
 
 
 <!-- 오늘 배운 것 정리 -->
+1. 02.search에서 pager disabled 구분해서 주는것.
+2. page 변수를 if문을 통해 바꿔 last 클릭 시 pager 구현하게 만들어주는 것
+3. polyfill은 es6문법을 es5로 바꿔주는 기능
+4. callback함수 정의 다시 배움
