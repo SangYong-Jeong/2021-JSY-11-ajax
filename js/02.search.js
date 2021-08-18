@@ -55,9 +55,7 @@ function setBlogLists(r) {
 
 function setImageLists(r) {
 	$('.pager-wrap').hide();
-	if(page === 1) {
-		$('.lists').empty().attr({'class': 'lists image', 'style': ''});
-	}
+	if(page === 1) $('.lists').empty().attr({'class': 'lists image', 'style': ''});
 	else $('.observer').remove();
 	
 	r.forEach(function(v, i) {
