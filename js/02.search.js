@@ -18,7 +18,7 @@ function getParams(query) {
 }
 
 function setTotalCnt(cnt) {
-	$('.result-cnt').html(numberFormat(cnt));
+	$('.result-cnt').html(numeral(cnt).format('0,0'));
 }
 
 function setWebLists(r) {
@@ -116,7 +116,7 @@ function setBookLists(r) {
 		var author = v.authors.join(', ');
 		var thumbnail = v.thumbnail !== '' ? v.thumbnail : 'http://via.placeholder.com/120x174/eee?text=No+image';
 		var translator = v.translators.join(', ');
-		var salePrice = v.sale_price > -1 ? numberFormat(v.sale_price)+'원' : '판매중지';
+		var salePrice = v.sale_price > -1 ? numeral(v.sale_price).format('0,0')+'원' : '판매중지';
 		var isbn = v.isbn.replace(' ', ' / ');
 		var dt = moment(v.datetime).format('YYYY-MM-DD');
 		html  = '<li class="list">';
@@ -131,7 +131,7 @@ function setBookLists(r) {
 		if(v.translators.length) html += '<span class="translator"> (역: '+translator+')</span>';
 		html += '</div>';
 		html += '<div class="prices">';
-		html += '<span class="price">'+numberFormat(v.price)+'</span> | ';
+		html += '<span class="price">'+numreal(v.price).format('0,0')+'</span> | ';
 		html += '<span class="sale-price">'+salePrice+'</span>';
 		if(v.status) html += '<span class="status"> ['+v.status+']</span>';
 		html += '</div>';
