@@ -32,3 +32,4 @@ function onIntersection(el, observer) {
 	})
 	// console.log(el, observer);
 }
+

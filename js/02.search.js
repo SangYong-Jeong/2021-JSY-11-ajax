@@ -2,7 +2,7 @@
 var auth = 'KakaoAK 4545d096ee04bdcea13013e722fa668f';
 var kakaoURL = 'https://dapi.kakao.com/';
 var data = [];
-var cate, query, page = 1;
+var cate, query, isEnd = false, page = 1;
 var size = {web: 10, blog: 10, book: 10, cafe: 10, vclip: 15, image:80}
 var observer;
 
@@ -54,7 +54,7 @@ function setBlogLists (r) {
 	});
 }
 
-/* function setImageLists (r) {
+function setImageLists (r) {
 	$('.lists').empty().attr('class', 'lists image grid-wrap');
 	$('.lists').append('<li class="list grid-sizer"></li>');
 	r.forEach(function (v, i) {
@@ -81,11 +81,11 @@ function setBlogLists (r) {
 	});
 	$grid.imagesLoaded().progress( function() {
 		$grid.masonry('layout');
-		$grid.masonry('reloadItems');
+		// $grid.masonry('reloadItems');
 	});
-} */
+}
 
-function setImageLists (r) {
+/* function setImageLists (r) {
 	data = [];
 	$('.lists').empty().attr({'class': 'lists image grid-wrap', 'style': ''});
 	$('.lists').append('<li class="list grid-sizer"></li>');
@@ -106,6 +106,11 @@ function setImageLists (r) {
 		html += '</li>';
 		$(html).appendTo('.lists').click(onModalShow);
 	});
+	// Observer 처리
+	$('.lists').append('<div class="observer"></div>');
+	observer = new IntersectionObserver(onIntersection, {thresholde: 1});
+	observer.observe(document.querySelector('.lists .observer'));
+
 	var $grid = $('.grid-wrap').masonry({
 		itemSelector: '.grid-item',
 		columnWidth: '.grid-sizer',
@@ -115,14 +120,15 @@ function setImageLists (r) {
 		$grid.masonry('layout');
 		$grid.masonry('reloadItems');
 	});
-}
+} */
 
 function setClipLists (r) {
 	$('.pager-wrap').hide();
-	$('.lists').empty().attr({'class': 'lists clip', 'style': ''});
+	if(page === 1) $('.lists').empty().attr({'class': 'lists clip', 'style': ''});
+	else $('.observer').remove();
 	var html = '';
 	r.forEach(function (v, i) {
-	html = '<li class="list">';
+	html  = '<li class="list">';
 	html += '<a href="'+v.url+'" class="thumbs" target="_blank">';
 	html += '<img src="'+v.thumbnail+'" alt="'+v.title+'" class="w100">';
 	html += '</a>';
@@ -136,11 +142,12 @@ function setClipLists (r) {
 	html += '<div class="dt">'+moment(v.datetime).format('YYYY-MM-DD HH:mm:ss')+'</div>';
 	html += '</div>';
 	html += '</li>';
-		$('.lists').append(html);
-	});
-	$('.lists').append('<li class="observer"></li>');
-	observer = new IntersectionObserver(onIntersection, {});
-	observer.observe(document.querySelector('.lists .observer'));
+	$('.lists').append(html);
+});
+// Observer 처리
+	$('.lists').after('<div class="observer"></div>');
+	observer = new IntersectionObserver(onIntersection, {thresholde: 1});
+	observer.observe(document.querySelector('.observer'));
 }
 
 function setBookLists (r) {
@@ -200,9 +207,10 @@ function setCafeLists (r) {
 	});
 }
 
-function setPager (isEnd, totalRecord) {
+function setPager (totalRecord) {
 	$('.pager-wrap').show();
-	// if(observer) observer.unobserve(document.querySelector('.lists .observer'));
+	if(observer && document.querySelector('.lists .observer'))
+	observer.unobserve(document.querySelector('.lists .observer'));
 
 	page = Number(page);
 	var totalPage = Math.ceil(totalRecord/size[cate]); // 총 페이지수
@@ -260,7 +268,14 @@ function setIntersection () {
 /************* event callback ************/
 function onIntersection (el) {
 	el.forEach(function (v, i) {
-		console.log(v.intersecting);
+		console.log(v.isIntersecting);
+		if(el[el.length - 1].intersecting && isEnd === false) {
+			page = Number(page) + 1;
+			axios.get(getPath(cate), getParams(query)).then(onSuccess).catch(onError);
+		}
+		if(isEnd === true) {
+			// observer.unobserve(document.)
+		}
 	});
 }
 
@@ -290,6 +305,7 @@ function onSubmit(e) {
 	e.preventDefault();
 	cate = $(this).find('select[name="category"]').val().trim();
 	query = $(this).find('input[name="query"]').val().trim();
+	page = 1;
 	if(cate && cate !== '' && query && query !== '')
 	axios.get(getPath(cate), getParams(query)).then(onSuccess).catch(onError);
 	else
@@ -301,7 +317,8 @@ function onSuccess (res) {
 	var cateStr = res.config.url.split('/').pop();
 	var v = res.data;
 	setTotalCnt(v.meta.pageable_count);
-	if(cate !== 'vclip' || cate !== 'image') setPager(v.meta.is_end, v.meta.pageable_count);
+	isEnd = v.meta.is_end;
+	if(cate !== 'vclip' || cate !== 'image') setPager(v.meta.pageable_count);
 	switch(cateStr) {
 		case 'web':
 			setWebLists(v.documents);
